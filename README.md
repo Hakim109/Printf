@@ -1,6 +1,6 @@
 Printf project
 
-this a team project 
+this is a team project 
 
 
 team's membres
