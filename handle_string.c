@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
 /**
 *handle_string - Function to handle the %s format specifier

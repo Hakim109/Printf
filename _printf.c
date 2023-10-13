@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
 #include "main.h"
 
 /**
@@ -13,8 +10,7 @@
 
 int _printf(const char *format, ...)
 {
-	int i;
-	int count_args = 0;
+	int i, count_args = 0;
 	va_list args;
 
 	va_start(args, format);
@@ -34,7 +30,7 @@ int _printf(const char *format, ...)
 
 				write(1, &c, 1);
 				count_args++;
-	}
+			}
 			else if (format[i] == 's')
 			{
 				const char *str = va_arg(args, const char *);
@@ -47,11 +43,12 @@ int _printf(const char *format, ...)
 				_putchar('%');
 				count_args++;
 			}
-			else
+			else if (format[i] == 'd' || format[i] == 'i')
 			{
-				_putchar('%');
-				_putchar(format[i]);
-				count_args += 2;
+				int num = va_arg(args, int);
+
+				handle_int(num);
+				count_args += snprintf(NULL, 0, "%d", num);
 			}
 		}
 		else
