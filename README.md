@@ -1,9 +1,8 @@
 Printf project
 
-this is a team project 
+This is a team project 
 
-
-team's membres
+Team's membres
 *****************
 Hakim ACHCHAR
 Chaimaa Boustane
