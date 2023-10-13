@@ -4,6 +4,7 @@
 
 int main(void)
 {
-	 _printf("Hello, %s! My age is %d.", "John", 25);
+	 _printf("Hello, %s! %%  My age is %c. %%", "John", 'A');
+	 printf("\n");
 	 return (0);
 }

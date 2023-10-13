@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
 #include "main.h"
 
 /**
@@ -13,7 +14,7 @@
 int _printf(const char *format, ...)
 {
 	int i;
-	int num_of_args = 0;
+	int count_args = 0;
 	va_list args;
 
 	va_start(args, format);
@@ -31,35 +32,35 @@ int _printf(const char *format, ...)
 			{
 				int c = va_arg(args, int);
 
-				_putchar(c);
-				num_of_args++;
+				write(1, &c, 1);
+				count_args++;
 	}
 			else if (format[i] == 's')
 			{
 				const char *str = va_arg(args, const char *);
 
 				handle_string(str);
-				num_of_args++;
+				count_args++;
 			}
 			else if (format[i] == '%')
 			{
 				_putchar('%');
-				num_of_args++;
+				count_args++;
 			}
 			else
 			{
 				_putchar('%');
 				_putchar(format[i]);
-				num_of_args += 2;
+				count_args += 2;
 			}
 		}
 		else
 		{
 			_putchar(format[i]);
-			num_of_args++;
+			count_args++;
 		}
 	}
 
 	va_end(args);
-	return (num_of_args);
+	return (count_args);
 }
