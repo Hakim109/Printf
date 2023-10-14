@@ -1,13 +1,10 @@
 #include "main.h"
-
 /**
  * _printf - Function to hundel formated char
  * @format: formated char
  * @...: args to print
- *
  * Return: count of args printed
  */
-
 int _printf(const char *format, ...)
 {
 	int i, count_args = 0;
@@ -23,20 +20,13 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-
 			if (format[i] == 'c')
 			{
-				int c = va_arg(args, int);
-
-				write(1, &c, 1);
-				count_args++;
+				count_args += print_char(va_arg(args, int));
 			}
 			else if (format[i] == 's')
 			{
-				const char *str = va_arg(args, const char *);
-
-				handle_string(str);
-				count_args++;
+				count_args += print_str(va_arg(args, const char *));
 			}
 			else if (format[i] == '%')
 			{
@@ -45,19 +35,15 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
-				int num = va_arg(args, int);
-
-				handle_int(num);
-				count_args += snprintf(NULL, 0, "%d", num);
+				count_args += print_int(va_arg(args, int));
 			}
 		}
 		else
 		{
-			_putchar(format[i]);
+			print_char(format[i]);
 			count_args++;
 		}
 	}
-
 	va_end(args);
 	return (count_args);
 }
