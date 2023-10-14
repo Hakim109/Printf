@@ -11,16 +11,6 @@ int print_str(char *str)
 	return (0);
 }
 /**
- * print_int - function take arg int
- * @num: argumenet
- * Return: number
- */
-int print_int(int num)
-{
-	handle_int(num);
-	return (snprintf(NULL, 0, "%d", num));
-}
-/**
  * spe_format - checks if a character is a valid format
  * @c: the character to check
  * Return: 1 if valid format, 0 otherwise
