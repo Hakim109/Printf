@@ -2,49 +2,37 @@
 /**
  * _printf - Function to hundel formated char
  * @format: formated char
- * @...: args to print
+ * @...: args list
  * Return: count of args printed
  */
 int _printf(const char *format, ...)
 {
-	int i, count_args = 0;
+	int count_args;
 	va_list args;
+
+	if (!format || !format[0])
+	{
+		return (-1);
+	}
+
+	count_args = 0;
 
 	va_start(args, format);
 
-	if (format == NULL)
-		return (-1);
-
-	for (i = 0; format[i] != '\0'; i++)
+	while (*format)
 	{
-		if (format != '%')
-			write(1, format, 1);
-		if (format[i] == '%')
+		if (*format == '%')
 		{
-			i++;
-			if (format[i] == 'c')
-			{
-				count_args += print_char(va_arg(args, int));
-			}
-			else if (format[i] == 's')
-			{
-				count_args += print_str(va_arg(args, const char *));
-			}
-			else if (format[i] == '%')
-			{
-				print_char('%');
-				count_args++;
-			}
-			else if (format[i] == 'd' || format[i] == 'i')
-			{
-				count_args += print_int(va_arg(args, int));
-			}
+			format++;
+			count_args += handle_format(format, args);
+			format = skip_format(format);
 		}
 		else
 		{
-			print_char(format[i]);
+			print_char(*format);
 			count_args++;
 		}
+		format++;
 	}
 	va_end(args);
 	return (count_args);

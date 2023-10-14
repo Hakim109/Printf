@@ -5,24 +5,30 @@
 *
 *Return: void.
 */
-void handle_string(const char *str)
+int handle_string(char *str)
 {
+	int count = 0;
+
 	if (str == NULL)
 	{
 		char *n = "(null)";
 
 		while (*n)
 		{
-			_putchar(*n);
+			print_char(*n);
 			n++;
+			count++;
 		}
+		return (count);
 	}
 	else
 	{
 		while (*str)
 		{
-			_putchar(*str);
+			print_char(*str);
 			str++;
+			count++;
 		}
 	}
+	return (count);
 }
