@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == '%')
 			{
-				_putchar('%');
+				print_char('%');
 				count_args++;
 			}
 			else if (format[i] == 'd' || format[i] == 'i')
