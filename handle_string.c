@@ -1,61 +1,63 @@
 #include "main.h"
+
 /**
- * convert - converts number into string
- * @num: input number
- * @base: input base
- * @lowercase: flag if hexa values need to be lowercase
- * Return: result string
+ * get_flag - check flag
+ * @s: char flag
+ * @f: pointer to the struct
+ * Return: 1 if flags , 0
  */
-char *convert(unsigned long int num, int base, int lowercase)
+int get_flag(char s, flags_t *f)
 {
-	static char *rep;
-	static char buffer[50];
-	char *ptr;
+	int i = 0;
 
-	rep = (lowercase)
-		? "0123456789abcdef"
-		: "0123456789ABCDEF";
-	ptr = &buffer[49];
-	*ptr = '\0';
-	do {
-		*--ptr = rep[num % base];
-		num /= base;
-	} while (num != 0);
-
-	return (ptr);
-}
-/**
- * _putchar - print char
- * @c: The character to print
- * Return: On success 1 or -1
- */
-int _putchar(char c)
-{
-	static char buf[1024];
-	static int i;
-
-	if (c == -1 || i >= 1024)
+	switch (s)
 	{
-		write(1, &buf, i);
-		i = 0;
+		case '+':
+			f->plus = 1;
+			i = 1;
+			break;
+		case ' ':
+			f->space = 1;
+			i = 1;
+			break;
+		case '#':
+			f->hash = 1;
+			i = 1;
+			break;
 	}
-	if (c != -1)
-	{
-		buf[i] = c;
-		i++;
-	}
-	return (1);
-}
-/**
- * _puts - prints a string to stdout
- * @str: pointer to the string to print
- * Return: number of chars written
- */
-int _puts(char *str)
-{
-	register int i;
-
-	for (i = 0; str[i] != '\0'; i++)
-		_putchar(str[i]);
 	return (i);
 }
+
+/**
+ * print_string - loops through a string and prints
+ * every character
+ * @l: va_list arguments from _printf
+ * @f: pointer to the struct flags that determines
+ * if a flag is passed to _printf
+ * Return: number of char printed
+ */
+int print_string(va_list l, flags_t *f)
+{
+	char *s = va_arg(l, char *);
+
+	(void)f;
+
+	if (!s)
+		s = "(null)";
+	return (_puts(s));
+}
+
+/**
+ * print_char - prints a character
+ * @l: va_list arguments from _printf
+ * @f: pointer to the struct flags that determines
+ * if a flag is passed to _printf
+ * Return: number of char printed
+ */
+int print_char(va_list l, flags_t *f)
+{
+	(void)f;
+	_putchar(va_arg(l, int));
+	return (1);
+}
+

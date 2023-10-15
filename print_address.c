@@ -1,9 +1,32 @@
 #include "main.h"
 /**
- * print_bigS - Non printable characters
- * @l: va_list arguments from _printf
- * @f: pointer to the struct flags
- * Return: number of char printed
+ * print_address - prints address
+ * @l: va_list arguments
+ * @f: pointer to the struct
+ * Return: number of chars
+ */
+int print_address(va_list l, flags_t *f)
+{
+	char *str;
+	unsigned long int p = va_arg(l, unsigned long int);
+
+	register int count = 0;
+
+	(void)f;
+
+	if (!p)
+		return (_puts("(nil)"));
+	str = convert(p, 16, 1);
+	count += _puts("0x");
+	count += _puts(str);
+	return (count);
+}
+
+/**
+ * print_bigS - Non printable char
+ * @l: va_list arguments
+ * @f: pointer to the struct
+ * Return: number of char
  */
 int print_bigS(va_list l, flags_t *f)
 {
@@ -31,12 +54,12 @@ int print_bigS(va_list l, flags_t *f)
 	}
 	return (count);
 }
+
 /**
- * print_rev - prints a string in reverse
- * @l: argument from _printf
- * @f: pointer to the struct flags that determines
- * if a flag is passed to _printf
- * Return: length of the printed string
+ * print_rev - reverse str
+ * @l: argument
+ * @f: pointer to the struct
+ * Return: length string
  */
 int print_rev(va_list l, flags_t *f)
 {
@@ -55,11 +78,12 @@ int print_rev(va_list l, flags_t *f)
 
 	return (i);
 }
+
 /**
- * print_rot13 - prints a string using rot13
+ * print_rot13 - using rot13
  * @l: list of arguments from _printf
- * @f: pointer to the struct flags
- * Return: length of the printed string
+ * @f: pointer to the struct flags that determines
+ * Return: count
  */
 int print_rot13(va_list l, flags_t *f)
 {
@@ -88,11 +112,12 @@ int print_rot13(va_list l, flags_t *f)
 			}
 			return (count);
 }
+
 /**
  * print_percent - prints a percent
- * @l: va_list arguments from _printf
- * @f: pointer to the struct flags
- * Return: number of char printed
+ * @l: va_list args
+ * @f: pointer to the struct
+ * Return: number of char
  */
 int print_percent(va_list l, flags_t *f)
 {
@@ -100,3 +125,4 @@ int print_percent(va_list l, flags_t *f)
 	(void)f;
 	return (_putchar('%'));
 }
+

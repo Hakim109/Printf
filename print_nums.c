@@ -1,10 +1,10 @@
 #include "main.h"
+
 /**
- * print_int - prints an integer
- * @l: va_list from _printf
+ * print_int - prints an int
+ * @l: va_list of arg
  * @f: pointer to the struct
- *
- * Return: number of char printed
+ * Return: number of char
  */
 int print_int(va_list l, flags_t *f)
 {
@@ -22,11 +22,10 @@ int print_int(va_list l, flags_t *f)
 }
 
 /**
- * print_unsigned - prints an unsigned integer
- * @l: va_list of arguments from _printf
+ * print_unsigned - unsigned integer
+ * @l: va_list of arg
  * @f: pointer to the struct
- * if a flag is passed to _printf
- * Return: number of char printed
+ * Return: number of char
  */
 int print_unsigned(va_list l, flags_t *f)
 {
@@ -38,8 +37,8 @@ int print_unsigned(va_list l, flags_t *f)
 }
 
 /**
- * print_number - looper function
- * @n: integer to be printed
+ * print_number - looper func
+ * @n: int to printed
  */
 void print_number(int n)
 {
@@ -59,9 +58,9 @@ void print_number(int n)
 }
 
 /**
- * count_digit - fucntion for integer
- * @i: integer to evaluate
- * Return: number of digits
+ * count_digit - returns count digits
+ * @i: int args
+ * Return: count digits
  */
 int count_digit(int i)
 {
@@ -79,3 +78,4 @@ int count_digit(int i)
 	}
 	return (d);
 }
+

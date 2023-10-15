@@ -1,9 +1,10 @@
 #include "main.h"
+
 /**
- * print_hex - prints a number in hexadecimal base,
- * in lowercase
- * @l: va_list arguments from _printf
+ * print_hex - prints a number in hexadecimal
+ * @l: va_list arguments
  * @f: pointer to the struct
+ * Return: the number of char printed
  */
 int print_hex(va_list l, flags_t *f)
 {
@@ -18,8 +19,8 @@ int print_hex(va_list l, flags_t *f)
 }
 
 /**
- * print_hex_big - prints a number in hexadecimal base,
- * @l: va_list arguments from _printf
+ * print_hex_big - prints hexadecimal
+ * @l: va_list arg
  * @f: pointer to the struct
  * Return: the number of char printed
  */
@@ -36,10 +37,10 @@ int print_hex_big(va_list l, flags_t *f)
 }
 
 /**
- * print_binary - prints base 2
- * @l: va_list arguments
+ * print_binary - prints a number base 2
+ * @l: va_list arg
  * @f: pointer to the struct
- * Return: the number of char printed
+ * Return: str
  */
 int print_binary(va_list l, flags_t *f)
 {
@@ -51,10 +52,10 @@ int print_binary(va_list l, flags_t *f)
 }
 
 /**
- * print_octal - prints a number in base 8
- * @l: va_list arguments from _printf
+ * print_octal - prints a number base 8
+ * @l: va_list arg
  * @f: pointer to the struct
- * Return: the number of char printed
+ * Return: number of char
  */
 int print_octal(va_list l, flags_t *f)
 {
@@ -67,3 +68,4 @@ int print_octal(va_list l, flags_t *f)
 	count += _puts(str);
 	return (count);
 }
+
