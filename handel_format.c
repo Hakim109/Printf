@@ -1,37 +1,34 @@
 #include "main.h"
-
 /**
- * handle_format - handles specific format specifiers
- * @format: pointer to the current format specifier
- * @args: va_list containing the arguments
+ * get_print - check format and call func
+ * @s: character indicate format
  *
- * Return: the number of characters printed
+ * Return: a pointer to func
  */
-int handle_format(const char *format, va_list args)
+int (*get_print(char s))(va_list, flags_t *)
 {
-	char *str, c;
-	int count_args = 0, num;
+	ph func_arr[] = {
+		{'i', print_int},
+		{'s', print_string},
+		{'c', print_char},
+		{'d', print_int},
+		{'u', print_unsigned},
+		{'x', print_hex},
+		{'X', print_hex_big},
+		{'b', print_binary},
+		{'o', print_octal},
+		{'R', print_rot13},
+		{'r', print_rev},
+		{'S', print_bigS},
+		{'p', print_address},
+		{'%', print_percent}
+		};
+	int flags = 14;
 
-	if (*format == 'c')
-	{
-		c = va_arg(args, int);
-		print_char(c);
-		count_args++;
-	}
-	else if (*format == 's')
-	{
-		str = va_arg(args, char *);
-		count_args += handle_string(str);
-	}
-	else if (*format == 'd' || *format == 'i')
-	{
-		num = va_arg(args, int);
-		count_args += handle_int(num);
-	}
-	else if (*format == '%')
-	{
-		print_char('%');
-		count_args++;
-	}
-	return (count_args);
+	register int i;
+
+	for (i = 0; i < flags; i++)
+		if (func_arr[i].c == s)
+			return (func_arr[i].f);
+	return (NULL);
 }

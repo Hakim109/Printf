@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _printf - Function to hundel formated char
  * @format: formated char
@@ -7,33 +8,38 @@
  */
 int _printf(const char *format, ...)
 {
-	int count_args;
-	va_list args;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-	if (!format || !format[0])
-	{
+	register int count = 0;
+
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	}
-
-	count_args = 0;
-
-	va_start(args, format);
-
-	while (*format)
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-		if (*format == '%')
+		if (*p == '%')
 		{
-			format++;
-			count_args += handle_format(format, args);
-			format = skip_format(format);
-		}
-		else
-		{
-			print_char(*format);
-			count_args++;
-		}
-		format++;
+			p++;
+			if (*p == '%')
+			{
+				count += _putchar('%');
+				continue;
+			}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-	va_end(args);
-	return (count_args);
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 }
